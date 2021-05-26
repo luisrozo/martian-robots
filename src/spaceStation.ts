@@ -14,30 +14,11 @@ export class SpaceStation {
         this._mars = mars;
     }
 
-    public setRobotsAndExecuteInstructions(robotsInfo: string[]): void {
-
-        //console.log("--> SETTING ROBOTS <--");
-
-        let robotInitialPosition: string, robotInstructions: string;
-
-        robotsInfo.forEach( (robotLine, index) => {
-    
-            if(!(index % 2)) {
-
-                robotInitialPosition = robotLine;
-
-            } else {
-
-                robotInstructions = robotLine;
-        
-                this.executeRobotInstructions(robotInitialPosition, robotInstructions);
-            }
-        
-        });
+    public showPlanetInfo(): void {
 
     }
 
-    private executeRobotInstructions(robotInitialPosition: string, robotInstructions: string): void {
+    public setRobotsAndExecuteInstructions(robotInitialPosition: string, robotInstructions: string): void {
 
         const [ initialX, initialY, initialOrientation ] = robotInitialPosition.split(' ');
         const coordinates: Coordinates = new Coordinates(Number(initialX), Number(initialY));
