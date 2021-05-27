@@ -1,20 +1,14 @@
-import { REGEXP_PLANET_SIZE, REGEXP_ROBOT_INITIAL_POSITION, REGEXP_ROBOT_INSTRUCTIONS } from "./constants";
+import { PATH_TO_INPUT_FILE, REGEXP_PLANET_SIZE } from "./constants";
 import { Mars } from "./mars";
+import * as fs from 'fs';
 import { SpaceStation } from "./spaceStation";
+import { preprocessInputAndSendInformation } from "./helpers";
 
-const sampleInput: string[] = [
-    '5 3',
-    '6 1 E',
-    'RFRFRFRF',
-    '3 2 N',
-    'FRRFLLFFRRFLL',
-    '0 3 W',
-    'LLFFFLFLFL'
-];
+const inputInfo: string[] = fs.readFileSync(PATH_TO_INPUT_FILE).toString().split("\n");
 
 let mars: Mars;
 
-const planetSize: string | undefined = sampleInput.shift();
+const planetSize: string | undefined = inputInfo.shift();
 
 // Check if input is empty
 if(planetSize) {
@@ -25,72 +19,23 @@ if(planetSize) {
     if(regExpPlanetSize.test(planetSize)) {
 
         // Check if the rest of the information is properly formatted
-        if(sampleInput.length && (sampleInput.length % 2 == 0)) {
+        if(inputInfo.length && (inputInfo.length % 2 == 0)) {
 
             const [ marsUpperRightXCoordinate, marsUpperRightYCoordinate ] = planetSize.split(' ');
 
             const marsWidth: number = (Number(marsUpperRightXCoordinate) > 50 || Number(marsUpperRightXCoordinate) < 1) ? 51 : Number(marsUpperRightXCoordinate) + 1;
             const marsHeight: number = (Number(marsUpperRightYCoordinate) > 50 || Number(marsUpperRightYCoordinate) < 1) ? 51 : Number(marsUpperRightYCoordinate) + 1;
 
-            console.log("Found Mars planet of dimensions: " + marsWidth + "x" + marsHeight);
+            console.log("Found Mars planet of dimensions " + marsWidth + "x" + marsHeight);
 
             mars = new Mars(marsWidth, marsHeight);
 
             const spaceStation: SpaceStation = new SpaceStation(mars);
 
             // Preprocess input line by line, in order to clean information up and send it properly formatted to SpaceStation class
-            let i: number = 0;
-            let robotInitialPosition: string = '';
-            let robotInstructions: string = '';
+            preprocessInputAndSendInformation(spaceStation, inputInfo, marsWidth, marsHeight);
 
-            const regExpRobotPosition: RegExp = new RegExp(REGEXP_ROBOT_INITIAL_POSITION);
-            const regExpRobotInstructions: RegExp = new RegExp(REGEXP_ROBOT_INSTRUCTIONS);
-
-            let infoLine: string = '';
-            while(i < sampleInput.length) {
-
-                infoLine = sampleInput[i];
-
-                // Line with robot position information
-                if(regExpRobotPosition.test(infoLine)) {
-
-                    const [ xCoordinate, yCoordinate ] = infoLine.split(' ');
-
-                    if(Number(xCoordinate) >= 0 && Number(xCoordinate) < marsWidth && Number(yCoordinate) >= 0 && Number(yCoordinate) < marsHeight) {
-                        robotInitialPosition = infoLine;
-
-                        if(robotInstructions != '') {
-                            spaceStation.setRobotsAndExecuteInstructions(robotInitialPosition, robotInstructions);
-    
-                            robotInitialPosition = '';
-                            robotInstructions = '';
-                        }                        
-                    } else {
-                        console.error("FORMAT ERROR: Robot coordinates out of bounds. X coordinate must be between 0 and planet width - 1. Y coordinate must be between 0 and planet height - 1.");
-                    }
-
-                // Line with robot instructions information
-                } else if(regExpRobotInstructions.test(infoLine)) {
-
-                    robotInstructions = infoLine;
-
-                    if(robotInitialPosition != '') {
-                        spaceStation.setRobotsAndExecuteInstructions(robotInitialPosition, robotInstructions);
-
-                        robotInitialPosition = '';
-                        robotInstructions = '';
-                    }                    
-
-                } else {
-                    console.error("FORMAT ERROR: Line '" + infoLine + "' has not proper format. Max. robot instructions: 100.");
-                }
-
-                i++;
-            }
-
-            mars.robots.forEach(robot => {
-                console.log(robot.toString());
-            });
+            spaceStation.showPlanetInfo();
 
         } else {
             console.error("FORMAT ERROR: Mars info must include two lines of information for each robot (one for position and another for instructions).");
@@ -103,3 +48,4 @@ if(planetSize) {
 } else {
     console.log("FILE CONTENT ERROR: file must contain information about Mars width and height.");
 }
+

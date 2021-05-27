@@ -10,15 +10,18 @@ export class SpaceStation {
     private _mars: Mars;
 
     constructor(mars: Mars) {
-        //console.log(" ! INITIALIZE SPACE STATION ! ");
         this._mars = mars;
     }
 
-    public showPlanetInfo(): void {
-
-    }
-
-    public setRobotsAndExecuteInstructions(robotInitialPosition: string, robotInstructions: string): void {
+    /**
+     * Sets a new robot in Mars and execute its instructions.
+     * 
+     * @param robotInitialPosition - The robot initial position coordinates and orientation.
+     * @param robotInstructions - The robot instructions to be executed.
+     * 
+     * @returns If robot has fallen during its travelling or not.
+     */
+    public setRobotAndExecuteInstructions(robotInitialPosition: string, robotInstructions: string): boolean {
 
         const [ initialX, initialY, initialOrientation ] = robotInitialPosition.split(' ');
         const coordinates: Coordinates = new Coordinates(Number(initialX), Number(initialY));
@@ -27,24 +30,20 @@ export class SpaceStation {
         const robot: Robot = new Robot(position);
         this._mars.addRobot(robot);
 
+        // Execute robot instructions one by one until all instructions have been executed or robot has fallen.
         for(let i = 0; !robot.isLost && i < robotInstructions.length; i++) {
             const instruction = robotInstructions[i];
 
             if(!robot.isLost) {
 
-                /*console.log("\n NEW INSTRUCTION")
-                console.log("Robot current position: " + robot.position.coordinates.xCoordinate + ' ' + robot.position.coordinates.yCoordinate + ' ' + robot.position.orientation);
-                console.log("Instruction: " + instruction);*/
-
+                // If instruction tells robot to step forward, check if it is going to fall or not.
                 if(instruction == 'F' && this.isRobotGoingToFall(robot.position)) {
                     
                     const currentRobotCoordinates: Coordinates = robot.position.coordinates;
 
+                    // Ignore instruction if there is already robot scent in current position.
                     if(!this._mars.positionHasRobotScent(currentRobotCoordinates)) {
-                        //console.log("NOOO, THERE'S NO SCENT AND ROBOT'S GONNA TO FAAAAAAAALL......");
                         this.setRobotAsLost(robot);
-                    } else {
-                        //console.log("There's some robots scent. Ignoring instruction.");
                     }
                     
                 } else {
@@ -53,7 +52,13 @@ export class SpaceStation {
             }
         }
 
-        //console.log("\nFinal position robot: " + robot);
+        return robot.isLost;
+    }
+
+    public showPlanetInfo(): void {
+        this._mars.robots.forEach(robot => {
+            console.log(robot.toString());
+        });
     }
 
     private isRobotGoingToFall(robotCurrentPosition: Position): boolean {

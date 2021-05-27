@@ -6,10 +6,6 @@ import { Robot } from "../robot";
  */
 export class Context {
 
-    /**
-     * @type { Instruction } The context maintains a reference to one
-     * type of instruction to be executed.
-     */
     private instruction: Instruction;
 
     constructor(instruction: Instruction) {

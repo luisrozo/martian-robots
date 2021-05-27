@@ -13,6 +13,8 @@ export const REGEXP_ROBOT_INITIAL_POSITION: string = '^\\d+\\s{1}\\d+\\s{1}[NSEW
 
 export const REGEXP_ROBOT_INSTRUCTIONS: string = '^[FLR]{1,100}$';
 
+export const PATH_TO_INPUT_FILE: string = process.cwd() + '/input/input.txt';
+
 export const orientations: orientationsDict = {
     ['N']: Orientation.N,
     ['S']: Orientation.S,

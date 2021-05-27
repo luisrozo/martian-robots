@@ -1,6 +1,12 @@
 import { Robot } from "./robot";
 import { Coordinates } from "./robotPosition/coordinates";
 
+/**
+ * Mars is a bidimensional planet with some width and height.
+ * Also, it has some robots in its surface.
+ * Some of the robots can be lost falling over the planet, 
+ * leaving some scent in the last cell they stepped.
+ */
 export class Mars {
 
     private _width: number;
@@ -52,18 +58,38 @@ export class Mars {
         return this._positionsWithRobotScent;
     }
 
+    /**
+     * Adds a new robot to Mars.
+     * 
+     * @param robot - The robot to be added.
+     */
     public addRobot(robot: Robot): void {
         this._robots.push(robot);
     }
     
+    /**
+     * Increment the number of lost robots in planet.
+     */
     public incrementLostRobots(): void {
         this._lostRobots++;
     }
 
+    /**
+     * Sets robot scent to one cell of the planet.
+     * 
+     * @param coordinates - The exact planet cell to set the robot scent.
+     */
     public setNewPositionWithRobotScent(coordinates: Coordinates): void {
         this._positionsWithRobotScent.push(coordinates);
     }
 
+    /**
+     * Checks if some planet cell has already robot scent.
+     * 
+     * @param coordinates - The coordinates of the planet to check.
+     * 
+     * @returns Whether the given cell has already scent or not.
+     */
     public positionHasRobotScent(coordinates: Coordinates): boolean {
         return this._positionsWithRobotScent.some( positionWithRobotScent => positionWithRobotScent.xCoordinate == coordinates.xCoordinate && positionWithRobotScent.yCoordinate == coordinates.yCoordinate);
     }

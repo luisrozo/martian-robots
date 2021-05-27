@@ -7,20 +7,11 @@ import { Context } from "./robotInstructions/context";
  */
 export class Robot {
 
-    /**
-     * @type { Position } The position represents some coordinates and the robot orientation.
-     */
     private _position: Position;
 
-    /**
-     * @type { boolean } The robot can be lost travelling around Mars.
-     */
     private _isLost: boolean;
 
     constructor(position: Position) {
-        /*console.log("-- Assembling new robot ...");
-        console.log("---- Coordinates: " + position.coordinates.xCoordinate + "," + position.coordinates.yCoordinate);
-        console.log("---- Orientation: " + position.orientation);*/
         this._position = position;
         this._isLost = false;
     }
@@ -40,6 +31,11 @@ export class Robot {
         this._isLost = value;
     }
 
+    /**
+     * Execute a given instruction (via context).
+     * 
+     * @param context - The context that indicates what a given instruction means.
+     */
     public move(context: Context): void {
         context.executeInstruction(this);
     }

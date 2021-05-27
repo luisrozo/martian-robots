@@ -8,6 +8,13 @@ import { Orientation } from "../robotPosition/orientation";
  */
 export class InstructionMoveForward implements Instruction {
 
+    /**
+     * Execute a instruction which make a robot take a step forward.
+     * 
+     * @param robot - The robot which will execute an instruction.
+     * 
+     * @override
+     */
     public executeInstruction(robot: Robot): void {
         switch(robot.position.orientation) {
 

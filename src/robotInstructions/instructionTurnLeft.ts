@@ -7,6 +7,13 @@ import { Orientation } from "../robotPosition/orientation";
  */
 export class InstructionTurnLeft implements Instruction {
 
+    /**
+     * Execute a instruction which make a robot turn left.
+     * 
+     * @param robot - The robot which will execute an instruction.
+     * 
+     * @override
+     */
     public executeInstruction(robot: Robot): void {
         switch(robot.position.orientation) {
 
