@@ -1,5 +1,11 @@
-import { REGEXP_ROBOT_INITIAL_POSITION, REGEXP_ROBOT_INSTRUCTIONS } from "./constants";
+import { getModelForClass } from '@typegoose/typegoose';
+import * as fs from 'fs';
+import mongoose from 'mongoose';
+import { MONGO_DATABASE_NAME, MONGO_URI, PATH_TO_OUTPUT_FILE, REGEXP_ROBOT_INITIAL_POSITION, REGEXP_ROBOT_INSTRUCTIONS } from "./constants";
+import { Mars } from "./mars";
+import { Robot } from "./robot";
 import { SpaceStation } from "./spaceStation";
+
 
 export const preprocessInputAndSendInformation = (spaceStation: SpaceStation, inputInfo: string[], marsWidth: number, marsHeight: number): void => {
 
@@ -57,4 +63,51 @@ export const preprocessInputAndSendInformation = (spaceStation: SpaceStation, in
         i++;
     }
 
+}
+
+export const saveRobots = (robots: Robot[]): void => {
+    // Stream for txt output file
+    const outputFileStream = fs.createWriteStream(PATH_TO_OUTPUT_FILE, { flags: 'w' });
+
+    // Robot model for db
+    const RobotModel = getModelForClass(Robot);
+
+    (async () => {
+
+        await mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true, dbName: MONGO_DATABASE_NAME })
+            .catch(error => {
+                console.error('Mongo DB connection error: ', error);
+            });
+
+        robots.forEach(async(robot) => {
+            // Save to output file
+            outputFileStream.write(robot.toString() + '\n');
+
+            // Save to db
+            await RobotModel.create(robot as Robot);
+        });
+
+    })();
+
+    console.log("Robots info saved in DB!");
+
+}
+
+export const saveMars = (mars: Mars): void => {
+    // Mars model for db
+    const MarsModel = getModelForClass(Mars);
+
+    (async () => {
+
+        await mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true, dbName: MONGO_DATABASE_NAME })
+            .catch(error => {
+                console.error('Mongo DB connection error: ', error);
+            });
+
+        // Save to db
+        MarsModel.create(mars as Mars);
+
+    })();
+
+    console.log("Planet info saved in DB!");
 }

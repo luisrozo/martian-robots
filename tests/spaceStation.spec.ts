@@ -1,10 +1,10 @@
-import { Mars } from "../src/mars";
 import { expect } from 'chai';
 import 'mocha';
+import { orientations } from "../src/constants";
+import { Mars } from "../src/mars";
 import { Robot } from "../src/robot";
 import { Coordinates } from "../src/robotPosition/coordinates";
 import { Orientation } from "../src/robotPosition/orientation";
-import { orientations } from "../src/constants";
 import { SpaceStation } from "../src/spaceStation";
 
 describe("test Space Station", () => {

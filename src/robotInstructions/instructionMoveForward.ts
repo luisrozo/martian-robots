@@ -1,6 +1,6 @@
-import { Instruction } from "./instruction";
 import { Robot } from "../robot";
 import { Orientation } from "../robotPosition/orientation";
+import { Instruction } from "./instruction";
 
 /**
  * A instruction for a robot. If executed, the robot will take one step forward,
@@ -37,5 +37,7 @@ export class InstructionMoveForward implements Instruction {
             default:
                 console.error('invalid orientation');
         }
+
+        robot.incrementExploredSurface(1);
     }
 }

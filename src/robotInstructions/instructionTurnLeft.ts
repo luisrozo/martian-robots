@@ -1,6 +1,6 @@
-import { Instruction } from "./instruction";
 import { Robot } from "../robot";
 import { Orientation } from "../robotPosition/orientation";
+import { Instruction } from "./instruction";
 
 /**
  * A instruction for a robot. If executed, the robot will turn 90º left.

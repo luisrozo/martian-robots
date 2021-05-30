@@ -1,5 +1,7 @@
+import { prop } from '@typegoose/typegoose';
 import { Robot } from "./robot";
 import { Coordinates } from "./robotPosition/coordinates";
+
 
 /**
  * Mars is a bidimensional planet with some width and height.
@@ -9,15 +11,19 @@ import { Coordinates } from "./robotPosition/coordinates";
  */
 export class Mars {
 
+    @prop()
     private _width: number;
 
+    @prop()
     private _height: number;
 
-    private _robots: Robot[];
-
+    @prop()
     private _lostRobots: number;
 
+    @prop({ type: () => [Coordinates] })
     private _positionsWithRobotScent: Coordinates[];
+
+    private _robots: Robot[];
 
     constructor(width: number, height: number) {
         

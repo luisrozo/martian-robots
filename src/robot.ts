@@ -1,5 +1,7 @@
-import { Position } from "./robotPosition/position";
+import { prop } from '@typegoose/typegoose';
 import { Context } from "./robotInstructions/context";
+import { Position } from "./robotPosition/position";
+
 
 /**
  * A Robot settled down on Mars is defined by its current position and its orientation.
@@ -7,13 +9,19 @@ import { Context } from "./robotInstructions/context";
  */
 export class Robot {
 
+    @prop()
     private _position: Position;
 
+    @prop()
     private _isLost: boolean;
+
+    @prop()
+    private _exploredSurface: number;
 
     constructor(position: Position) {
         this._position = position;
         this._isLost = false;
+        this._exploredSurface = 0;
     }
 
     public get position(): Position {
@@ -29,6 +37,19 @@ export class Robot {
     }
     public set isLost(value: boolean) {
         this._isLost = value;
+    }
+
+    public get exploredSurface(): number {
+        return this._exploredSurface;
+    }
+
+    /**
+     * Increment robot explored surface in given steps.
+     * 
+     * @param steps - The numbers of Robot steps.
+     */
+    public incrementExploredSurface(steps: number): void {
+        this._exploredSurface += steps;
     }
 
     /**

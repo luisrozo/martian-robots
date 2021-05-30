@@ -1,8 +1,8 @@
-import { PATH_TO_INPUT_FILE, REGEXP_PLANET_SIZE } from "./constants";
-import { Mars } from "./mars";
 import * as fs from 'fs';
+import { PATH_TO_INPUT_FILE, REGEXP_PLANET_SIZE } from "./constants";
+import { preprocessInputAndSendInformation, saveMars, saveRobots } from "./helpers";
+import { Mars } from "./mars";
 import { SpaceStation } from "./spaceStation";
-import { preprocessInputAndSendInformation } from "./helpers";
 
 const inputInfo: string[] = fs.readFileSync(PATH_TO_INPUT_FILE).toString().split("\n");
 
@@ -35,7 +35,14 @@ if(planetSize) {
             // Preprocess input line by line, in order to clean information up and send it properly formatted to SpaceStation class
             preprocessInputAndSendInformation(spaceStation, inputInfo, marsWidth, marsHeight);
 
+            // Show output info in console
             spaceStation.showPlanetInfo();
+
+            // Save robots info to output file and db
+            saveRobots(mars.robots);
+
+            // Save Mars info to db
+            saveMars(mars);
 
         } else {
             console.error("FORMAT ERROR: Mars info must include two lines of information for each robot (one for position and another for instructions).");
@@ -48,4 +55,3 @@ if(planetSize) {
 } else {
     console.log("FILE CONTENT ERROR: file must contain information about Mars width and height.");
 }
-

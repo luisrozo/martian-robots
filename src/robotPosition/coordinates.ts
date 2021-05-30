@@ -1,3 +1,4 @@
+import { prop } from "@typegoose/typegoose";
 
 /**
  * The coordinates representation of a robot position.
@@ -7,11 +8,13 @@ export class Coordinates {
     /**
      * @type { number } The horizontal position of robot.
      */
+    @prop()
     private _x: number;
 
     /**
      * @type { number } The vertical position of robot.
      */
+    @prop()
     private _y: number;
 
     constructor(x: number, y: number) {

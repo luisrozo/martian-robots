@@ -1,3 +1,4 @@
+import { prop } from "@typegoose/typegoose";
 import { Coordinates } from "./coordinates";
 import { Orientation } from "./orientation";
 
@@ -9,11 +10,13 @@ export class Position {
     /**
      * @type { Coordinates } The coordinates (x,y) of a robot current position.
      */
+    @prop()
     private _coordinates: Coordinates;
 
     /**
      * @type { Orientation } The orientation of a robot.
      */
+    @prop({ enum: Orientation })
     private _orientation: Orientation;
 
     constructor(coordinates: Coordinates, orientation: Orientation) {

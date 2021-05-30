@@ -1,5 +1,5 @@
-import { Instruction } from "./instruction";
 import { Robot } from "../robot";
+import { Instruction } from "./instruction";
 
 /**
  * The context defines the interface of the diferent robot instructions.

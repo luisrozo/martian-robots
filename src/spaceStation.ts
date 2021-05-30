@@ -1,9 +1,9 @@
-import { Mars } from "./mars";
 import { instructions, orientations } from "./constants";
-import { Coordinates } from "./robotPosition/coordinates";
-import { Position } from "./robotPosition/position";
+import { Mars } from "./mars";
 import { Robot } from "./robot";
+import { Coordinates } from "./robotPosition/coordinates";
 import { Orientation } from "./robotPosition/orientation";
+import { Position } from "./robotPosition/position";
 
 export class SpaceStation {
 
