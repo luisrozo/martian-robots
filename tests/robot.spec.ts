@@ -38,6 +38,7 @@ describe("test robot instructions", () => {
         const expectedXCoordinate: number = 2;
         const expectedYCoordinate: number = 3;
         const expectedOrientation: Orientation = Orientation.W;
+        const expectedExploredSurface: number = 0;
 
         instruction = instructions[instructionTurnLeft];
 
@@ -46,6 +47,7 @@ describe("test robot instructions", () => {
         expect(robot.position.coordinates.xCoordinate).to.be.equal(expectedXCoordinate);
         expect(robot.position.coordinates.yCoordinate).to.be.equal(expectedYCoordinate);
         expect(robot.position.orientation).to.be.equal(expectedOrientation);
+        expect(robot.exploredSurface).to.be.equal(expectedExploredSurface);
 
     });
 
@@ -54,6 +56,7 @@ describe("test robot instructions", () => {
         const expectedXCoordinate: number = 2;
         const expectedYCoordinate: number = 3;
         const expectedOrientation: Orientation = Orientation.E;
+        const expectedExploredSurface: number = 0;
 
         instruction = instructions[instructionTurnRight];
 
@@ -62,6 +65,7 @@ describe("test robot instructions", () => {
         expect(robot.position.coordinates.xCoordinate).to.be.equal(expectedXCoordinate);
         expect(robot.position.coordinates.yCoordinate).to.be.equal(expectedYCoordinate);
         expect(robot.position.orientation).to.be.equal(expectedOrientation);
+        expect(robot.exploredSurface).to.be.equal(expectedExploredSurface);
 
     });
 
@@ -70,6 +74,7 @@ describe("test robot instructions", () => {
         const expectedXCoordinate: number = 2;
         const expectedYCoordinate: number = 4;
         const expectedOrientation: Orientation = Orientation.N;
+        const expectedExploredSurface: number = 1;
 
         instruction = instructions[instructionMoveForward];
 
@@ -78,6 +83,7 @@ describe("test robot instructions", () => {
         expect(robot.position.coordinates.xCoordinate).to.be.equal(expectedXCoordinate);
         expect(robot.position.coordinates.yCoordinate).to.be.equal(expectedYCoordinate);
         expect(robot.position.orientation).to.be.equal(expectedOrientation);
+        expect(robot.exploredSurface).to.be.equal(expectedExploredSurface);
 
     });
 
@@ -86,6 +92,7 @@ describe("test robot instructions", () => {
         const expectedXCoordinate: number = 5;
         const expectedYCoordinate: number = 4;
         const expectedOrientation: Orientation = Orientation.W;
+        const expectedExploredSurface: number = 4;
 
         const instructionsList: string = "FRFFFLL";
 
@@ -97,6 +104,7 @@ describe("test robot instructions", () => {
         expect(robot.position.coordinates.xCoordinate).to.be.equal(expectedXCoordinate);
         expect(robot.position.coordinates.yCoordinate).to.be.equal(expectedYCoordinate);
         expect(robot.position.orientation).to.be.equal(expectedOrientation);
+        expect(robot.exploredSurface).to.be.equal(expectedExploredSurface);
 
     });
 
@@ -105,6 +113,7 @@ describe("test robot instructions", () => {
         const expectedXCoordinate: number = 2;
         const expectedYCoordinate: number = 3;
         const expectedOrientation: Orientation = Orientation.N;
+        const expectedExploredSurface: number = 0;
 
         const instructionsList: string = "";
 
@@ -116,6 +125,7 @@ describe("test robot instructions", () => {
         expect(robot.position.coordinates.xCoordinate).to.be.equal(expectedXCoordinate);
         expect(robot.position.coordinates.yCoordinate).to.be.equal(expectedYCoordinate);
         expect(robot.position.orientation).to.be.equal(expectedOrientation);
+        expect(robot.exploredSurface).to.be.equal(expectedExploredSurface);
 
     });
 
