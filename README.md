@@ -12,6 +12,7 @@ This project has been developed to resolve the Martian Robots coding challenge. 
    1. [Input](#input)
    2. [Output](#output)
 3. [System design](#system-design)
+   1. [Strategy design pattern](#strategy-design-pattern)
 4. [Input format validation](#input-format-validation)
 5. [MongoDB stored information](#mongodb-stored-information)
    1. [Information and examples](#information-and-examples)
@@ -95,6 +96,8 @@ Furthermore, some extra information will be stored in a Mongo database. This wil
 The developed system has the following classes:
 
 ![](./media/classes_diagram.png)
+
+### Strategy design pattern
 
 The **Strategy design pattern** has been selected for implementing the robots instructions, as more instructions could be added in the future.
 
