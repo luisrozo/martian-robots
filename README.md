@@ -1,4 +1,4 @@
-# Martian Robots
+# Martian Robots 🤖
 
 This project has been developed to resolve the Martian Robots coding challenge. Here, you can find information about solution details and how to run the program.
 
@@ -20,7 +20,7 @@ This project has been developed to resolve the Martian Robots coding challenge. 
 6. [Testing](#testing)
    1. [Test cases](#test-cases)
 
-## How to run the project
+## How to run the project 🚀
 
 Here you can find information about how to run the project in your machine.
 
@@ -28,7 +28,7 @@ Here you can find information about how to run the project in your machine.
 
 If you want to see stored data in MongoDB, previously you have to create a Docker container. Run the following command:
 ```
-> sudo docker run --name martian_robots -d -p 127.0.0.1:27017:27017 mongo
+sudo docker run --name martian_robots -d -p 127.0.0.1:27017:27017 mongo
 ```
 
 ### Execute script
@@ -40,13 +40,13 @@ Inside the `/input/` directory, you will find a `input.txt` file. You can edit i
 Then, in the root directory, execute this commands:
 
 ```
-> npm i
-> npm run start
+npm i
+npm run start
 ```
 
 Finally, you will have the results of the execution in the `output.txt` file inside the `/output/` directory, as well as stored data in MongoDB if you started the container as aforementioned.
 
-## General information
+## General information ℹ️
 
 Our Space Station has discovered **Mars**, a bidimensional planet where our robots can land and move on their own (following our instructions). Unfortunately, our robots can fall into space while they are travelling around the planet, getting lost forever. However, a place where a robot has been lost, is a place where no more robots will be lost, as they can recognize where a mate has fallen, avoiding tripping over the same stone twice.
 
@@ -91,7 +91,7 @@ For example, the output corresponding to the previous input would be:
 
 Furthermore, some extra information will be stored in a Mongo database. This will be explained in detail later.
 
-## System design
+## System design ⚙️
 
 The developed system has the following classes:
 
@@ -109,7 +109,7 @@ The **Strategy design pattern** has been selected for implementing the robots in
 
 The function `incrementExploredSurface()` of the Robot class allow us to easily keep consistent robot information when creating new instructions for taking steps.
 
-## Input format validation
+## Input format validation ✅
 
 The input file has some validation in order to control the content of the file. This validation is carried out thanks to some regular expressions.
 
@@ -128,7 +128,7 @@ The following regular expressions have been used:
 - Position: `^\\d+\\s{1}\\d+\\s{1}[NSEW]{1}$`
 - Instructions: `^[FLR]{1,100}$`
 
-## MongoDB stored information
+## MongoDB stored information 💾
 
 Using MongoDB, each running of the program saves documents which contain information about final state of both robots and Mars.
 
@@ -157,12 +157,12 @@ Example:
 - **[Typegoose](https://github.com/typegoose/typegoose)** is used for modeling the classes Robot and Mars in order to be stored on MongoDB.
 - A docker container is used to have a MongoDB instance running.
 
-## Testing
+## Testing 🐛
 
 **[Mocha](https://mochajs.org/)** is the framework selected for testing. You can run tests using the command:
 
 ```
-> npm test
+npm test
 ```
 
 on project root directory.
