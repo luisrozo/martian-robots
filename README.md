@@ -4,6 +4,47 @@ This project has been developed to resolve the Martian Robots coding challenge. 
 
 **The project has been developed with TypeScript**.
 
+# Table of contents
+1. [How to run the project](#how-to-run-the-project)
+   1. [(Optional) Store data in MongoDB](#optional-store-data-in-mongodb)
+   2. [Execute script](#execute-script)
+2. [General information](#general-information)
+   1. [Input](#input)
+   2. [Output](#output)
+3. [System design](#system-design)
+4. [Input format validation](#input-format-validation)
+5. [MongoDB stored information](#mongodb-stored-information)
+   1. [Information and examples](#information-and-examples)
+   2. [Technologies](#technologies)
+6. [Testing](#testing)
+   1. [Test cases](#test-cases)
+
+## How to run the project
+
+Here you can find information about how to run the project in your machine.
+
+### (Optional) Store data in MongoDB
+
+If you want to see stored data in MongoDB, previously you have to create a Docker container. Run the following command:
+```
+sudo docker run --name martian_robots -d -p 127.0.0.1:27017:27017 mongo
+```
+
+### Execute script
+
+Clone the content of this repository (clone or download it). 
+
+Inside the `/input/` directory, you will find a `input.txt` file. You can edit it to have different executions of the script. Read the [input](#Input) section of this document to find more information about how to properly edit this file.
+
+Then, in the root directory, execute this commands:
+
+```
+> npm i
+> npm run start
+```
+
+Finally, you will have the results of the execution in the `output.txt` file inside the `/output/` directory, as well as stored data in MongoDB if you started the container as aforementioned.
+
 ## General information
 
 Our Space Station has discovered **Mars**, a bidimensional planet where our robots can land and move on their own (following our instructions). Unfortunately, our robots can fall into space while they are travelling around the planet, getting lost forever. However, a place where a robot has been lost, is a place where no more robots will be lost, as they can recognize where a mate has fallen, avoiding tripping over the same stone twice.
@@ -118,7 +159,7 @@ Example:
 **[Mocha](https://mochajs.org/)** is the framework selected for testing. You can run tests using the command:
 
 ```
-npm test
+> npm test
 ```
 
 on project root directory.
