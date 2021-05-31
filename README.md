@@ -28,7 +28,7 @@ Here you can find information about how to run the project in your machine.
 
 If you want to see stored data in MongoDB, previously you have to create a Docker container. Run the following command:
 ```
-sudo docker run --name martian_robots -d -p 127.0.0.1:27017:27017 mongo
+> sudo docker run --name martian_robots -d -p 127.0.0.1:27017:27017 mongo
 ```
 
 ### Execute script
@@ -123,7 +123,7 @@ Validations are:
 
 A line which does not match any of these rules will be ignored. Also, a robot is only set when one valid line of position and one valid line of instructions are found. 
 
-The following regular expression have been used:
+The following regular expressions have been used:
 - Planet size: `^\\d+\\s{1}\\d+$`
 - Position: `^\\d+\\s{1}\\d+\\s{1}[NSEW]{1}$`
 - Instructions: `^[FLR]{1,100}$`
