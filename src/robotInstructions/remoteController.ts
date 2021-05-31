@@ -2,9 +2,9 @@ import { Robot } from "../robot";
 import { Instruction } from "./instruction";
 
 /**
- * The context defines the interface of the diferent robot instructions.
+ * The remote controller defines the interface of the diferent robot instructions.
  */
-export class Context {
+export class RemoteController {
 
     private instruction: Instruction;
 
@@ -16,9 +16,8 @@ export class Context {
         this.instruction = instruction;
     }
 
-    public executeInstruction(robotToMove: Robot): void {
-        
+    public executeInstruction(robotToMove: Robot): void {        
         this.instruction.executeInstruction(robotToMove);
-
     }
+    
 }

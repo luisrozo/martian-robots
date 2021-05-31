@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import 'mocha';
 import { instructions, orientations } from '../src/constants';
 import { Robot } from '../src/robot';
-import { Context } from '../src/robotInstructions/context';
+import { RemoteController } from '../src/robotInstructions/remoteController';
 import { Coordinates } from '../src/robotPosition/coordinates';
 import { Orientation } from '../src/robotPosition/orientation';
 import { Position } from '../src/robotPosition/position';
@@ -21,7 +21,7 @@ describe("test robot instructions", () => {
     let initialOrientation: Orientation;
     let initialPosition: Position;
 
-    let instruction: Context;
+    let instruction: RemoteController;
 
     let robot: Robot;
 

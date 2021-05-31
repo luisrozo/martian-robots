@@ -1,11 +1,11 @@
-import { Context } from "./robotInstructions/context";
 import { InstructionMoveForward } from "./robotInstructions/instructionMoveForward";
 import { InstructionTurnLeft } from "./robotInstructions/instructionTurnLeft";
 import { InstructionTurnRight } from "./robotInstructions/instructionTurnRight";
+import { RemoteController } from "./robotInstructions/remoteController";
 import { Orientation } from "./robotPosition/orientation";
 
 type orientationsDict = { [key: string]: Orientation };
-type instructionsDict = { [key: string]: Context };
+type instructionsDict = { [key: string]: RemoteController };
 
 export const REGEXP_PLANET_SIZE: string = '^\\d+\\s{1}\\d+$';
 
@@ -29,7 +29,7 @@ export const orientations: orientationsDict = {
 }
 
 export const instructions: instructionsDict = {
-    ['L']: new Context(new InstructionTurnLeft()),
-    ['R']: new Context(new InstructionTurnRight()),
-    ['F']: new Context(new InstructionMoveForward()),
+    ['L']: new RemoteController(new InstructionTurnLeft()),
+    ['R']: new RemoteController(new InstructionTurnRight()),
+    ['F']: new RemoteController(new InstructionMoveForward()),
 }

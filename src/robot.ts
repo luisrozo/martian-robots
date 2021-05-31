@@ -1,5 +1,5 @@
 import { prop } from '@typegoose/typegoose';
-import { Context } from "./robotInstructions/context";
+import { RemoteController } from "./robotInstructions/remoteController";
 import { Position } from "./robotPosition/position";
 
 
@@ -53,12 +53,12 @@ export class Robot {
     }
 
     /**
-     * Execute a given instruction (via context).
+     * Execute a given instruction (via remote controller).
      * 
-     * @param context - The context that indicates what a given instruction means.
+     * @param remoteController - The remote controller that indicates what a given instruction means.
      */
-    public move(context: Context): void {
-        context.executeInstruction(this);
+    public move(remoteController: RemoteController): void {
+        remoteController.executeInstruction(this);
     }
 
     public toString(): string {
