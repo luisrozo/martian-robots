@@ -66,8 +66,7 @@ export const preprocessInputAndSendInformation = (spaceStation: SpaceStation, in
 }
 
 export const saveRobots = (robots: Robot[]): void => {
-    // Stream for txt output file
-    const outputFileStream = fs.createWriteStream(PATH_TO_OUTPUT_FILE, { flags: 'w' });
+    generateOutputFile(robots);
 
     // Robot model for db
     const RobotModel = getModelForClass(Robot);
@@ -80,17 +79,23 @@ export const saveRobots = (robots: Robot[]): void => {
             });
 
         robots.forEach(async(robot) => {
-            // Save to output file
-            outputFileStream.write(robot.toString() + '\n');
-
             // Save to db
             await RobotModel.create(robot as Robot);
         });
 
+        console.log("Robots info saved in DB!");
+
     })();
 
-    console.log("Robots info saved in DB!");
+}
 
+const generateOutputFile = (robots: Robot[]): void => {
+    // Stream for txt output file
+    const outputFileStream = fs.createWriteStream(PATH_TO_OUTPUT_FILE, { flags: 'w' });
+
+    robots.forEach(robot => outputFileStream.write(robot.toString() + '\n'));
+
+    console.log("Output file available on /output/output.txt!");
 }
 
 export const saveMars = (mars: Mars): void => {
@@ -107,7 +112,8 @@ export const saveMars = (mars: Mars): void => {
         // Save to db
         MarsModel.create(mars as Mars);
 
-    })();
+        console.log("Mars info saved in DB!");
 
-    console.log("Planet info saved in DB!");
+    })();
+    
 }
